@@ -49,6 +49,26 @@ async def issue_verify_link(client: Client, message: Message, payload: str):
     )
 
 
+async def send_verify_bypass_warning(client: Client, message: Message, attempt_count: int, seconds_left: int):
+    warning_photo = client.messages.get("VERIFY_WARN_PHOTO", client.messages.get("SHORT_PIC", ""))
+    warning_text = client.messages.get(
+        "VERIFY_WARN_MSG",
+        "⚠️ You are trying to bypass verification.\nWait {seconds}s and use the new link.\nAttempt: {attempt}/2"
+    )
+    caption = warning_text.format(attempt=attempt_count, seconds=max(seconds_left, 0))
+
+    if warning_photo:
+        try:
+            return await client.send_photo(
+                chat_id=message.chat.id,
+                photo=warning_photo,
+                caption=caption
+            )
+        except Exception as e:
+            client.LOGGER(__name__, client.name).warning(f"Failed to send verify warning photo: {e}")
+
+    return await message.reply(caption)
+
 @Client.on_message(filters.command('start') & filters.private)
 @force_sub
 async def start_command(client: Client, message: Message):
@@ -110,7 +130,7 @@ async def start_command(client: Client, message: Message):
                     await client.mongodb.ban_user(user_id)
                     return await message.reply("🚫 You are banned for repeated early verification abuse.")
 
-                await message.reply(f"⚠️ You verified too early. Wait for timer to finish. New link generated.\nAttempts: {count}/2")
+                await send_verify_bypass_warning(client, message, count, left)
                 await issue_verify_link(client, message, verify_data.get("payload", ""))
                 return
 
