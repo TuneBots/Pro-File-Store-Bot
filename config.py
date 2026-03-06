@@ -12,13 +12,13 @@ MSG_EFFECT = 5046509860389126442
 SHORT_URL = "vplink.in" # shortner url 
 SHORT_API = "b4c55b5464676e8a7bbf9e8903b00a289debbec3" 
 SHORT_TUT = "https://t.me/HowToDownloadSnap/2"
-VERIFY_COOLDOWN = int(os.environ.get("VERIFY_COOLDOWN", "30"))
+VERIFY_COOLDOWN = int(os.environ.get("VERIFY_COOLDOWN", "180"))
 VERIFY_REDIRECT_DELAY = int(os.environ.get("VERIFY_REDIRECT_DELAY", "5"))
 VERIFY_LOG_CHANNEL = int(os.environ.get("VERIFY_LOG_CHANNEL", "0"))
 SERVICE_URL = os.environ.get("SERVICE_URL", "")
 
 # Bot Configuration
-SESSION = "SnapXPagluBot"
+SESSION = "GetBestKurkureBot"
 TOKEN = os.environ.get("TOKEN", "")
 API_ID = os.environ.get("API_ID", "")
 API_HASH = os.environ.get("API_HASH", "")
@@ -29,7 +29,7 @@ DB_NAME = "yato"
 
 FSUBS = [[-1003759386278, True, 10]] # Force Subscription Channels [channel_id, request_enabled, timer_in_minutes]
 # Database Channel (Primary)
-DB_CHANNEL = -1003542287615   # just put channel id dont add ""
+DB_CHANNEL = -1003591916255   # just put channel id dont add ""
 # Multiple Database Channels (can be set via bot settings)
 # DB_CHANNELS = {
 #     "-1002595092736": {"name": "Primary DB", "is_primary": True, "is_active": True},
