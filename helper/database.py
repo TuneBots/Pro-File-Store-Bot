@@ -127,6 +127,40 @@ class MongoDB:
         user = await self.user_data.find_one({'_id': user_id})
         return user.get('ban', False) if user else False
 
+
+    async def set_referrer(self, user_id: int, referrer_id: int):
+        await self.user_data.update_one(
+            {'_id': user_id},
+            {'$set': {'referrer_id': referrer_id}},
+            upsert=True
+        )
+
+    async def get_referrer(self, user_id: int):
+        user = await self.user_data.find_one({'_id': user_id})
+        return user.get('referrer_id') if user else None
+
+    async def is_referral_rewarded(self, user_id: int) -> bool:
+        user = await self.user_data.find_one({'_id': user_id})
+        return user.get('referral_rewarded', False) if user else False
+
+    async def mark_referral_rewarded(self, user_id: int):
+        await self.user_data.update_one(
+            {'_id': user_id},
+            {'$set': {'referral_rewarded': True}},
+            upsert=True
+        )
+
+    async def add_referral_success(self, referrer_id: int):
+        await self.user_data.update_one(
+            {'_id': referrer_id},
+            {'$inc': {'referral_success_count': 1}},
+            upsert=True
+        )
+
+    async def get_referral_success(self, referrer_id: int) -> int:
+        user = await self.user_data.find_one({'_id': referrer_id})
+        return user.get('referral_success_count', 0) if user else 0
+
     # ✅ FSUB CHANNELS FUNCTIONS
 
     async def set_fsub_channels(self, fsub_data: dict):

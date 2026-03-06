@@ -6,7 +6,7 @@ from helper.helper_func import encode
 
 #===============================================================#
 
-@Client.on_message(filters.private & filters.incoming & ~filters.service & ~filters.command(['start', 'shortner','users','broadcast','batch','genlink','stats','usage', 'pbroadcast', 'db', 'adddb', 'add_db', 'removedb', 'rm_db',  'ban', 'unban', 'addpremium', 'delpremium', 'premiumusers', 'request', 'profile']))
+@Client.on_message(filters.private & filters.incoming & ~filters.service & ~filters.command(['start', 'shortner','users','broadcast','batch','genlink','stats','usage', 'pbroadcast', 'db', 'adddb', 'add_db', 'removedb', 'rm_db',  'ban', 'unban', 'addpremium', 'delpremium', 'premiumusers', 'request', 'profile', 'refer']))
 async def channel_post(client: Client, message: Message):
 
     # Avoid intercepting commands not listed above (e.g. /help, /settings, /anything@bot)

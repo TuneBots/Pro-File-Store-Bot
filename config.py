@@ -57,6 +57,8 @@ MESSAGES = {
     "VERIFY_WARN_MSG": "<b>⚠️ Verification bypass detected!\nPlease wait {seconds} seconds and use your new verify link.\nAttempt: {attempt}/2</b>",
     "CHANNEL_LINK_PHOTO": "https://telegra.ph/file/7a16ef7abae23bd238c82-b8fbdcb05422d71974.jpg",
     "CHANNEL_LINK_MSG": "<b>📢 Channel access link ready for <i>{channel_name}</i>.\n⏳ This join-request link will expire in {expire_minutes} minutes.\n👇 Tap button below to join.</b>",
+    "REFER_PHOTO": "https://telegra.ph/file/7a16ef7abae23bd238c82-b8fbdcb05422d71974.jpg",
+    "REFER_MSG": "<b>🎁 Refer & Earn Program!\nInvite your friends and after successful join, both of you get 1 day premium.</b>\n\n🔗 {invite_link}",
     "SHORT": "https://telegra.ph/file/8aaf4df8c138c6685dcee-05d3b183d4978ec347.jpg"
 }
 
