@@ -57,7 +57,7 @@ MESSAGES = {
     "VERIFY_WARN_MSG": "<b>🎉 Cᴏɴɢʀᴀᴛᴜʟᴀᴛɪᴏɴs Yᴏᴜ Fᴜᴄᴋᴇᴅ Uᴘ.\n\n Bʏᴘᴀss ᴅᴇᴛᴇᴄᴛᴇᴅ. Tʜɪs ɪs ʏᴏᴜʀ {attempt} ᴀᴛᴛᴇᴍᴘᴛ, ʏᴏᴜ ᴡɪʟʟ ʙᴇ ʙᴀɴ ᴏɴ ᴛʜᴇ ɴᴇxᴛ ᴀᴛᴛᴇᴍᴘᴛ.\n\n Usᴇ Yᴏᴜʀ Nᴇᴡ Lɪɴᴋ Tᴏ Gᴇᴛ Fɪʟᴇs.</b>",
     "CHANNEL_LINK_PHOTO": "https://i.ibb.co/G4K04d7y/photo-2026-03-05-12-11-41-7613743080293793808.jpg",
     "CHANNEL_LINK_MSG": "<b>📢 Channel access link ready for <i>{channel_name}</i>.\n⏳ This join-request link will expire in {expire_minutes} minutes.\n👇 Tap button below to join.</b>",
-    "REFER_PHOTO": "https://telegra.ph/file/7a16ef7abae23bd238c82-b8fbdcb05422d71974.jpg",
+    "REFER_PHOTO": "https://i.ibb.co/Jww1k4v9/photo-2026-03-06-12-59-37-7614126517794111492.jpg",
     "REFER_MSG": "<b>🎁 Refer & Earn Program!\nInvite your friends and after successful join, both of you get 1 day premium.</b>\n\n🔗 {invite_link}",
     "DEFAULT_PROFILE_PIC": "https://i.ibb.co/SDMHjm76/photo-2026-03-06-12-48-22-7614123618691186708.jpg",
     "SHORT": "https://i.ibb.co/RGsH1m4T/photo-2026-03-05-12-10-50-7613742856955494416.jpg"
