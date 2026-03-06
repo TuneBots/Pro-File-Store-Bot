@@ -75,8 +75,14 @@ async def send_start_home(client: Client, message: Message):
     user_id = message.from_user.id
     buttons = [
         [InlineKeyboardButton("🎁 Refer & Earn", callback_data="refer_earn")],
-        [InlineKeyboardButton("Help", callback_data="about"), InlineKeyboardButton("Close", callback_data='close')]
     ]
+
+    service_url = getattr(client, 'service_url', '').rstrip('/')
+    if service_url:
+        mini_url = f"{service_url}/mini/{user_id}"
+        buttons.append([InlineKeyboardButton("📱 Mini App", url=mini_url)])
+
+    buttons.append([InlineKeyboardButton("Help", callback_data="about"), InlineKeyboardButton("Close", callback_data='close')])
     if user_id in client.admins:
         buttons.insert(0, [InlineKeyboardButton("⛩️ ꜱᴇᴛᴛɪɴɢꜱ ⛩️", callback_data="settings")])
 
@@ -534,6 +540,21 @@ async def refer_callback(client: Client, query):
         reply = query.message.reply
     await query.answer()
     await send_refer_panel(client, _Msg())
+
+
+
+@Client.on_message(filters.command('mini') & filters.private)
+@force_sub
+async def mini_command(client: Client, message: Message):
+    service_url = getattr(client, 'service_url', '').rstrip('/')
+    if not service_url:
+        return await message.reply("⚠️ Mini app is not configured yet.")
+
+    mini_url = f"{service_url}/mini/{message.from_user.id}"
+    await message.reply(
+        f"📱 Open your mini app profile:\n{mini_url}",
+        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Open Mini App", url=mini_url)]])
+    )
 
 
 #===============================================================#

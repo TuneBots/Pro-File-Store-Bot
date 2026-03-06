@@ -1,6 +1,6 @@
 from aiohttp import web
 from html import escape
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 
 routes = web.RouteTableDef()
 BOT_CLIENT = None
@@ -146,6 +146,94 @@ async def root_route_handler(request):
         <script>
             document.getElementById('year').textContent = new Date().getFullYear();
         </script>
+    </body>
+    </html>
+    """
+    return web.Response(text=html_page, content_type="text/html")
+
+
+@routes.get("/mini/{user_id}", allow_head=True)
+async def mini_profile_handler(request):
+    user_id_raw = request.match_info.get("user_id", "").strip()
+    if not user_id_raw.lstrip('-').isdigit():
+        return web.Response(text="Invalid user id", status=400)
+
+    user_id = int(user_id_raw)
+    if BOT_CLIENT is None:
+        return web.Response(text="Bot is not ready. Please try again.", status=503)
+
+    try:
+        user = await BOT_CLIENT.get_users(user_id)
+    except Exception:
+        return web.Response(text="User not found", status=404)
+
+    username = f"@{user.username}" if getattr(user, 'username', None) else "N/A"
+    full_name = (f"{user.first_name or ''} {user.last_name or ''}").strip() or "Unknown"
+
+    created_at = await BOT_CLIENT.mongodb.get_user_created_at(user_id)
+    ist = timezone(timedelta(hours=5, minutes=30))
+    if created_at is None:
+        started_ist = "Not Available"
+    else:
+        started_ist = created_at.replace(tzinfo=timezone.utc).astimezone(ist).strftime("%d-%m-%Y %I:%M:%S %p IST")
+
+    links_generated = await BOT_CLIENT.mongodb.get_links_generated(user_id)
+
+    default_dp = BOT_CLIENT.messages.get("DEFAULT_PROFILE_PIC", "https://telegra.ph/file/7a16ef7abae23bd238c82-b8fbdcb05422d71974.jpg")
+    if getattr(user, 'username', None):
+        profile_pic = f"https://t.me/i/userpic/320/{user.username}.jpg"
+    else:
+        profile_pic = default_dp
+
+    html_page = f"""
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Mini App • User Profile</title>
+        <style>
+            body {{margin:0; font-family:Arial,sans-serif; background:#0b1220; color:#e5e7eb;}}
+            .wrap {{width:min(900px,92vw); margin:24px auto;}}
+            .card {{background:#111827; border:1px solid #1f2937; border-radius:16px; padding:20px;}}
+            .head {{display:flex; gap:18px; align-items:center; flex-wrap:wrap;}}
+            .avatar {{width:110px; height:110px; border-radius:50%; object-fit:cover; border:3px solid #22d3ee;}}
+            .grid {{display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:16px;}}
+            .item {{background:#0f172a; border:1px solid #1e293b; border-radius:10px; padding:12px;}}
+            .label {{color:#9ca3af; font-size:12px;}}
+            .value {{font-weight:700; margin-top:4px;}}
+            .btns {{display:flex; gap:10px; flex-wrap:wrap; margin-top:18px;}}
+            .btn {{text-decoration:none; color:#001018; background:linear-gradient(90deg,#22d3ee,#38bdf8); padding:10px 14px; border-radius:10px; font-weight:700;}}
+            @media(max-width:700px){{ .grid{{grid-template-columns:1fr;}} }}
+        </style>
+    </head>
+    <body>
+        <div class="wrap">
+            <div class="card">
+                <div class="head">
+                    <img src="{escape(profile_pic)}" class="avatar" alt="profile" onerror="this.src='{escape(default_dp)}'" />
+                    <div>
+                        <h2 style="margin:0 0 8px;">Mini App Profile</h2>
+                        <div style="color:#93c5fd;">Welcome to TuneBots x Snap_Lover8</div>
+                    </div>
+                </div>
+
+                <div class="grid">
+                    <div class="item"><div class="label">User ID</div><div class="value">{user_id}</div></div>
+                    <div class="item"><div class="label">Username</div><div class="value">{escape(username)}</div></div>
+                    <div class="item"><div class="label">Name</div><div class="value">{escape(full_name)}</div></div>
+                    <div class="item"><div class="label">First Start (IST)</div><div class="value">{escape(started_ist)}</div></div>
+                    <div class="item"><div class="label">Links Generated</div><div class="value">{links_generated}</div></div>
+                    <div class="item"><div class="label">Status</div><div class="value">Active</div></div>
+                </div>
+
+                <div class="btns">
+                    <a class="btn" href="https://t.me/tunebots">Join TuneBots</a>
+                    <a class="btn" href="https://t.me/Snap_Lover8">Join Snap_Lover8</a>
+                    <a class="btn" href="https://t.me/SnapLoverXBot?start=premium">Buy Premium</a>
+                </div>
+            </div>
+        </div>
     </body>
     </html>
     """

@@ -132,6 +132,7 @@ async def gen_channel_link(client, query):
 
     token = secrets.token_urlsafe(6).replace('-', '').replace('_', '')[:8]
     link = f"https://t.me/{client.username}?start=channel_{channel_id}_{token}"
+    await client.mongodb.increment_links_generated(query.from_user.id)
 
     await query.message.edit_text(
         f"**✅ Channel link generated!**\n\n**Channel:** `{channel_chat.title or 'Unknown'}`\n**ID:** `{channel_id}`\n\n`{link}`",

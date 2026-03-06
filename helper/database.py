@@ -108,7 +108,7 @@ class MongoDB:
         return bool(found)
 
     async def add_user(self, user_id: int, ban: bool = False):
-        await self.user_data.insert_one({'_id': user_id, 'ban': ban})
+        await self.user_data.insert_one({'_id': user_id, 'ban': ban, 'created_at': datetime.now(), 'links_generated': 0, 'referral_success_count': 0})
 
     async def full_userbase(self) -> list[int]:
         cursor = self.user_data.find()
@@ -160,6 +160,23 @@ class MongoDB:
     async def get_referral_success(self, referrer_id: int) -> int:
         user = await self.user_data.find_one({'_id': referrer_id})
         return user.get('referral_success_count', 0) if user else 0
+
+
+
+    async def increment_links_generated(self, user_id: int):
+        await self.user_data.update_one(
+            {'_id': user_id},
+            {'$inc': {'links_generated': 1}},
+            upsert=True
+        )
+
+    async def get_links_generated(self, user_id: int) -> int:
+        user = await self.user_data.find_one({'_id': user_id})
+        return user.get('links_generated', 0) if user else 0
+
+    async def get_user_created_at(self, user_id: int):
+        user = await self.user_data.find_one({'_id': user_id})
+        return user.get('created_at') if user else None
 
     # ✅ FSUB CHANNELS FUNCTIONS
 
