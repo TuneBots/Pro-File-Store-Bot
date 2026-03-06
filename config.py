@@ -9,8 +9,8 @@ OWNER_ID = 6891095964
 
 MSG_EFFECT = 5046509860389126442
 
-SHORT_URL = "vplink.in" # shortner url 
-SHORT_API = "b4c55b5464676e8a7bbf9e8903b00a289debbec3" 
+SHORT_URL = "arolinks.com" # shortner url 
+SHORT_API = "2bd6b41b022d08c3d13cbe229497092a5c30cc7e" 
 SHORT_TUT = "https://t.me/HowToDownloadSnap/2"
 VERIFY_COOLDOWN = int(os.environ.get("VERIFY_COOLDOWN", "180"))
 VERIFY_REDIRECT_DELAY = int(os.environ.get("VERIFY_REDIRECT_DELAY", "5"))
