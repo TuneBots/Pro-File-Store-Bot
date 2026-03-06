@@ -152,6 +152,58 @@ async def root_route_handler(request):
     return web.Response(text=html_page, content_type="text/html")
 
 
+@routes.get("/mini", allow_head=True)
+@routes.get("/mini/", allow_head=True)
+async def mini_entry_handler(request):
+    user_id = (request.query.get("user_id") or "").strip()
+    if user_id and user_id.lstrip('-').isdigit():
+        raise web.HTTPFound(f"/mini/{user_id}")
+
+    html_page = """
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Mini App Loader</title>
+        <style>
+            body { margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center; background:#0b1220; color:#e5e7eb; font-family:Arial,sans-serif; }
+            .card { width:min(92vw,560px); background:#111827; border:1px solid #1f2937; border-radius:14px; padding:22px; text-align:center; }
+            .btn { display:inline-block; margin-top:14px; text-decoration:none; color:#001018; background:linear-gradient(90deg,#22d3ee,#38bdf8); padding:10px 14px; border-radius:10px; font-weight:700; }
+            .muted { color:#9ca3af; font-size:14px; }
+        </style>
+    </head>
+    <body>
+        <div class="card">
+            <h2 style="margin:0 0 10px;">Opening Mini App...</h2>
+            <p class="muted">If this page doesn't auto-open your profile, tap the button below.</p>
+            <a id="open" class="btn" href="#">Open My Profile</a>
+        </div>
+
+        <script>
+            const q = new URLSearchParams(window.location.search);
+            let uid = q.get('user_id');
+
+            if (!uid && window.Telegram && Telegram.WebApp && Telegram.WebApp.initDataUnsafe && Telegram.WebApp.initDataUnsafe.user) {
+                uid = Telegram.WebApp.initDataUnsafe.user.id;
+            }
+
+            const openBtn = document.getElementById('open');
+            if (uid) {
+                const target = `/mini/${uid}`;
+                openBtn.href = target;
+                window.location.replace(target);
+            } else {
+                openBtn.textContent = 'Open Mini with user_id';
+                openBtn.href = '/mini/123456?user_id=123456';
+            }
+        </script>
+    </body>
+    </html>
+    """
+    return web.Response(text=html_page, content_type="text/html")
+
+
 @routes.get("/mini/{user_id}", allow_head=True)
 async def mini_profile_handler(request):
     user_id_raw = request.match_info.get("user_id", "").strip()
