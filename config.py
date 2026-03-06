@@ -59,7 +59,7 @@ MESSAGES = {
     "CHANNEL_LINK_MSG": "<b>📢 Channel access link ready for <i>{channel_name}</i>.\n⏳ This join-request link will expire in {expire_minutes} minutes.\n👇 Tap button below to join.</b>",
     "REFER_PHOTO": "https://telegra.ph/file/7a16ef7abae23bd238c82-b8fbdcb05422d71974.jpg",
     "REFER_MSG": "<b>🎁 Refer & Earn Program!\nInvite your friends and after successful join, both of you get 1 day premium.</b>\n\n🔗 {invite_link}",
-    "DEFAULT_PROFILE_PIC": "https://telegra.ph/file/7a16ef7abae23bd238c82-b8fbdcb05422d71974.jpg",
+    "DEFAULT_PROFILE_PIC": "https://i.ibb.co/SDMHjm76/photo-2026-03-06-12-48-22-7614123618691186708.jpg",
     "SHORT": "https://i.ibb.co/RGsH1m4T/photo-2026-03-05-12-10-50-7613742856955494416.jpg"
 }
 
