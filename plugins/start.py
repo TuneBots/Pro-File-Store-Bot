@@ -522,7 +522,6 @@ async def start_command(client: Client, message: Message):
 #===============================================================#
 
 @Client.on_message(filters.command('refer') & filters.private)
-@force_sub
 async def refer_command(client: Client, message: Message):
     await send_refer_panel(client, message)
 
