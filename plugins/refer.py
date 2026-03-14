@@ -44,7 +44,7 @@ async def build_refer_panel(client: Client, user):
         "<b>🎁 Refer & Earn!\nInvite your friends and both of you get 1 day premium after successful join.</b>\n\n🔗 {invite_link}"
     ).format(invite_link=invite_link)
 
-    share_text = "Check this awesome file"
+    share_text = "Hey Bro! I think you'd love this Pink Kurkure Network! You'll get *millions of viral videos* for free! Check out this bot 🚀 + you also get *1 day free premium*! 😍"
     share_url = (
         "https://t.me/share/url"
         f"?url={quote(invite_link, safe='')}"
