@@ -45,7 +45,7 @@ async def issue_verify_link(client: Client, message: Message, payload: str):
     await client.send_photo(
         chat_id=message.chat.id,
         photo=short_photo,
-        caption=f"{short_caption}\n\n⏱ Verify timer: {getattr(client, 'verify_cooldown', 30)}s",
+        caption=f"{short_caption}\n\n<b><blockquote> Pᴏᴡᴇʀᴇᴅ Bʏ: @PinkKurkure</blockquote></b>",
         reply_markup=InlineKeyboardMarkup([
             [
                 InlineKeyboardButton("• ᴏᴘᴇɴ ʟɪɴᴋ", url=service_link),
@@ -62,7 +62,7 @@ async def send_verify_bypass_warning(client: Client, message: Message, attempt_c
     warning_photo = client.messages.get("VERIFY_WARN_PHOTO", client.messages.get("SHORT_PIC", ""))
     warning_text = client.messages.get(
         "VERIFY_WARN_MSG",
-        "⚠️ You are trying to bypass verification.\nWait {seconds}s and use the new link.\nAttempt: {attempt}/2"
+        "🎉 Cᴏɴɢʀᴀᴛᴜʟᴀᴛɪᴏɴs Yᴏᴜ Fᴜᴄᴋᴇᴅ Uᴘ.\n\n Bʏᴘᴀss ᴅᴇᴛᴇᴄᴛᴇᴅ. Tʜɪs ɪs ʏᴏᴜʀ {attempt} ᴀᴛᴛᴇᴍᴘᴛ, ʏᴏᴜ ᴡɪʟʟ ʙᴇ ʙᴀɴ ᴏɴ ᴛʜᴇ ɴᴇxᴛ ᴀᴛᴛᴇᴍᴘᴛ.\n\nUsᴇ Yᴏᴜʀ Nᴇᴡ Lɪɴᴋ Tᴏ Gᴇᴛ Fɪʟᴇs.</b>"
     )
     caption = warning_text.format(attempt=attempt_count, seconds=max(seconds_left, 0))
 
