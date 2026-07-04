@@ -73,16 +73,16 @@ async def root_route_handler(request):
     <body>
         <div class="nav">
             <div class="container nav-inner">
-                <div class="brand">⚡ Snap Lover Service</div>
-                <a class="btn" href="https://t.me/SnapLoverXBot">Open Bot</a>
+                <div class="brand">⚡ Orvix Network</div>
+                <a class="btn" href="https://t.me/OrvixNetworkBot">Open Bot</a>
             </div>
         </div>
 
         <main class="container">
             <section class="hero">
                 <div>
-                    <h1 class="headline">Snap Lover • Fast File Access & Smart Verification</h1>
-                    <p class="sub">Welcome to the official Snap Lover service page. Generate secure links, verify quickly, and access content with better anti-abuse protection and modern channel workflows.</p>
+                    <h1 class="headline">Orvix Network • Fast File Access & Smart Verification</h1>
+                    <p class="sub">Welcome to the official OrviX network service page. Generate secure links, verify quickly, and access content with better anti-abuse protection and modern channel workflows.</p>
                     <div class="chips">
                         <span class="chip">Secure Verify Flow</span>
                         <span class="chip">One-Time Links</span>
@@ -93,8 +93,8 @@ async def root_route_handler(request):
                 <div class="card">
                     <h2 style="margin-top:0">Official Channels</h2>
                     <p class="sub" style="margin-bottom:12px">Join updates, support, and latest drops.</p>
-                    <p><a class="btn" style="width:100%; text-align:center; margin-bottom:10px;" href="https://t.me/tunebots">Join @tunebots</a></p>
-                    <p><a class="btn" style="width:100%; text-align:center;" href="https://t.me/Snap_Lover8">Join @Snap_Lover8</a></p>
+                    <p><a class="btn" style="width:100%; text-align:center; margin-bottom:10px;" href="https://t.me/TheOrvix">Join TheOrviX</a></p>
+                    <p><a class="btn" style="width:100%; text-align:center;" href="https://t.me/PomPOmVideosRobot?start=start">Join Pom Pom Bot</a></p>
                     <div class="stats">
                         <div class="stat"><div>Uptime</div><b>24x7</b></div>
                         <div class="stat"><div>Invite TTL</div><b>15m</b></div>
@@ -140,7 +140,7 @@ async def root_route_handler(request):
         </main>
 
         <footer>
-            © <span id="year"></span> Snap Lover • Powered by TuneBots
+            © <span id="year"></span> Snap Lover • Powered by TheOrviX
         </footer>
 
         <script>
@@ -280,9 +280,9 @@ async def mini_profile_handler(request):
                 </div>
 
                 <div class="btns">
-                    <a class="btn" href="https://t.me/tunebots">Join TuneBots</a>
-                    <a class="btn" href="https://t.me/Snap_Lover8">Join Snap_Lover8</a>
-                    <a class="btn" href="https://t.me/SnapLoverXBot?start=premium">Buy Premium</a>
+                    <a class="btn" href="https://t.me/TheOrviX">Join TheOrviX</a>
+                    <a class="btn" href="https://t.me/Snap_Lover8">Join </a>
+                    <a class="btn" href="https://t.me/OrvixAdminBot?start=premium">Buy Premium</a>
                 </div>
             </div>
         </div>
